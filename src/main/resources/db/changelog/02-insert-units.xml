@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="2" author="dmytro.morgunov">
+        <insert tableName="users">
+            <column name="id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="name" value="UnitOwner"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="efe1264a-2ee8-47fc-a661-07ca3f82eb6c"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="4"/>
+            <column name="accommodation_type" value="APARTMENTS"/>
+            <column name="floor" value="10"/>
+            <column name="base_cost" value="118.00"/>
+            <column name="description" value="Test unit #1"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="0a5b083d-0a9e-467c-bfbe-d5c88cda7cd2"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="4"/>
+            <column name="accommodation_type" value="FLAT"/>
+            <column name="floor" value="8"/>
+            <column name="base_cost" value="107.00"/>
+            <column name="description" value="Test unit #2"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="e22076bf-3d44-471a-985c-b0882af06338"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="2"/>
+            <column name="accommodation_type" value="HOME"/>
+            <column name="floor" value="6"/>
+            <column name="base_cost" value="123.00"/>
+            <column name="description" value="Test unit #3"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="443d1408-dd97-40a5-be1d-a6790de68955"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="1"/>
+            <column name="accommodation_type" value="APARTMENTS"/>
+            <column name="floor" value="8"/>
+            <column name="base_cost" value="119.00"/>
+            <column name="description" value="Test unit #4"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="cf28c5c8-8fc0-4c62-b76d-9bb3c9ad27e6"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="5"/>
+            <column name="accommodation_type" value="HOME"/>
+            <column name="floor" value="8"/>
+            <column name="base_cost" value="254.00"/>
+            <column name="description" value="Test unit #5"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="ccb25d97-b983-473b-89fc-80a8772bb8bc"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="2"/>
+            <column name="accommodation_type" value="HOME"/>
+            <column name="floor" value="6"/>
+            <column name="base_cost" value="244.00"/>
+            <column name="description" value="Test unit #6"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="a020f27e-a332-4209-8ddf-10290b82abd6"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="2"/>
+            <column name="accommodation_type" value="APARTMENTS"/>
+            <column name="floor" value="8"/>
+            <column name="base_cost" value="184.00"/>
+            <column name="description" value="Test unit #7"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="6fc8b3d2-46f9-4a0e-ac99-3d58a539cd4e"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="2"/>
+            <column name="accommodation_type" value="HOME"/>
+            <column name="floor" value="9"/>
+            <column name="base_cost" value="180.00"/>
+            <column name="description" value="Test unit #8"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="bf441e40-b889-46b0-8df9-62370fbcb6b8"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="2"/>
+            <column name="accommodation_type" value="FLAT"/>
+            <column name="floor" value="9"/>
+            <column name="base_cost" value="104.00"/>
+            <column name="description" value="Test unit #9"/>
+        </insert>
+
+        <insert tableName="units">
+            <column name="id" value="25738430-9b1f-43d7-905d-9aacb3fcc0fb"/>
+            <column name="user_id" value="10ccaade-10de-4a6d-8bc4-9540bcfba8dd"/>
+            <column name="number_of_rooms" value="4"/>
+            <column name="accommodation_type" value="APARTMENTS"/>
+            <column name="floor" value="3"/>
+            <column name="base_cost" value="245.00"/>
+            <column name="description" value="Test unit #10"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

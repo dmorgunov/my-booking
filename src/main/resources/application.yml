@@ -1,0 +1,21 @@
+server.shutdown: graceful
+
+# PostgreSQL & Redis config
+spring:
+  application:
+    name: booking
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking_db
+    username: booking_user
+    password: booking_pass
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+
+# Redisson config
+redisson:
+  config: classpath:redisson-config.yml
