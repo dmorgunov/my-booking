@@ -37,7 +37,7 @@ A Java 21 monolithic booking system built with **Spring Boot**, **Spring Data JP
 ### 1. Clone & Build
 
 ```bash
-git clone https://github.com/your-org/booking-system.git
+git clone https://github.com/dmorgunov/my-booking
 cd booking-system
 ./gradlew clean build
 ```
