@@ -1,17 +1,18 @@
 package dm.dev.booking.job;
 
-
 import dm.dev.booking.model.Unit;
 import dm.dev.booking.model.User;
 import dm.dev.booking.model.repos.UnitRepository;
 import dm.dev.booking.model.repos.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Random;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UnitDataLoaderJob {
@@ -21,9 +22,15 @@ public class UnitDataLoaderJob {
 
     @PostConstruct
     public void populateUnits() {
-        if (unitRepository.count() >= 100) return; // Assume at least 10 from Liquibase
+        var count = unitRepository.count();
+        if (count >= 100) {
+            log.info("Unit data loader skipped — {} units already exist.", count);
+            return;
+        }
 
-        User owner = userRepository.findAll().stream().findFirst().orElseGet(() -> {
+        log.info("Populating unit data — current unit count: {}", count);
+
+        var owner = userRepository.findAll().stream().findFirst().orElseGet(() -> {
             User newUser = new User();
             newUser.name("RuntimeOwner");
             return userRepository.save(newUser);
@@ -38,5 +45,7 @@ public class UnitDataLoaderJob {
                     .description("Auto-generated unit " + i);
             unitRepository.save(unit);
         }
+
+        log.info("Finished populating 90 auto-generated units.");
     }
 }

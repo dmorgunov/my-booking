@@ -2,8 +2,6 @@ package dm.dev.booking.controller;
 
 import dm.dev.booking.controller.dto.PaymentRequest;
 import dm.dev.booking.controller.dto.PaymentResponse;
-import dm.dev.booking.model.Payment;
-import dm.dev.booking.service.BookingService;
 import dm.dev.booking.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,7 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<PaymentResponse> savePayment(@RequestBody PaymentRequest request) {
         var payment = paymentService.createPayment(request);
         return ResponseEntity.ok(

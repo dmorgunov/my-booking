@@ -1,36 +1,96 @@
-<?xml version='1.0' encoding='utf-8'?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-  <changeSet id="1" author="dmytro.morgunov">
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <createTable tableName="users">
-      <column name="id" type="UUID" autoIncrement="false" />
-      <column name="name" type="VARCHAR(255)" />
-    </createTable>
+    <changeSet id="1" author="dmytro.morgunov">
 
-    <createTable tableName="units">
-      <column name="id" type="UUID" />
-      <column name="user_id" type="UUID" />
-      <column name="number_of_rooms" type="INT" />
-      <column name="accommodation_type" type="VARCHAR(50)" />
-      <column name="floor" type="INT" />
-      <column name="base_cost" type="DECIMAL(10,2)" />
-      <column name="description" type="TEXT" />
-    </createTable>
+        <createTable tableName="users">
+            <column name="id" type="UUID" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-    <createTable tableName="bookings">
-      <column name="id" type="UUID" />
-      <column name="unit_id" type="UUID" />
-      <column name="user_id" type="UUID" />
-      <column name="start_date" type="DATE" />
-      <column name="end_date" type="DATE" />
-      <column name="status" type="VARCHAR(20)" />
-    </createTable>
+        <createTable tableName="units">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_unit_user" references="users(id)"/>
+            </column>
+            <column name="number_of_rooms" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="accommodation_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="floor" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="base_cost" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+        </createTable>
 
-    <createTable tableName="payments">
-      <column name="id" type="UUID" />
-      <column name="booking_id" type="UUID" />
-      <column name="paid" type="BOOLEAN" />
-    </createTable>
+        <createTable tableName="bookings">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="unit_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_booking_unit" references="units(id)"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_booking_user" references="users(id)"/>
+            </column>
+            <column name="start_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
-  </changeSet>
+        <createTable tableName="payments">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="booking_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_payment_booking" references="bookings(id)"/>
+            </column>
+            <column name="paid" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Indexes for performance -->
+        <createIndex indexName="idx_unit_user_id" tableName="units">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_booking_unit_id" tableName="bookings">
+            <column name="unit_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_booking_user_id" tableName="bookings">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_booking_status" tableName="bookings">
+            <column name="status"/>
+        </createIndex>
+
+        <createIndex indexName="idx_payment_booking_id" tableName="payments">
+            <column name="booking_id"/>
+        </createIndex>
+
+    </changeSet>
+
 </databaseChangeLog>

@@ -3,6 +3,7 @@ package dm.dev.booking.controller;
 import dm.dev.booking.controller.dto.UnitRequest;
 import dm.dev.booking.controller.dto.UnitResponse;
 import dm.dev.booking.model.Unit;
+import dm.dev.booking.service.CacheService;
 import dm.dev.booking.service.UnitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class UnitController {
 
     private final UnitService unitService;
+    private final CacheService cacheService;
 
     @PostMapping
     public ResponseEntity<UnitResponse> createUnit(@RequestBody UnitRequest request) {
@@ -65,5 +67,11 @@ public class UnitController {
                 unit.baseCost(),
                 unit.description()
         );
+    }
+
+
+    @GetMapping("/available")
+    public ResponseEntity<Integer> getAvailableUnitCount() {
+        return ResponseEntity.ok(cacheService.getAvailableUnitCount());
     }
 }

@@ -28,8 +28,15 @@ dependencies {
 
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation ("org.springframework.boot:spring-boot-starter-web")
+    testImplementation ("org.springframework:spring-test")
+    testImplementation ("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly ("com.h2database:h2")
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation ("com.jayway.jsonpath:json-path")
+    testImplementation ("org.mockito:mockito-core")
+
+//    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     //lombok
     compileOnly("org.projectlombok:lombok:1.18.30")

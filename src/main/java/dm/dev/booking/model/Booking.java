@@ -2,7 +2,6 @@ package dm.dev.booking.model;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

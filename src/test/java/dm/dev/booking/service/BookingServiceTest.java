@@ -1,5 +1,6 @@
 package dm.dev.booking.service;
 
+import dm.dev.booking.config.AppProperties;
 import dm.dev.booking.controller.dto.BookingRequest;
 import dm.dev.booking.model.Booking;
 import dm.dev.booking.model.Unit;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,6 +28,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class BookingServiceTest {
 
+    @Mock
+    private AppProperties appProperties;
     @Mock
     private BookingRepository bookingRepository;
     @Mock
@@ -67,6 +71,8 @@ class BookingServiceTest {
 
         Booking savedBooking = new Booking().id(UUID.randomUUID()).unit(unit).user(user).startDate(start).endDate(end).status(Booking.BookingStatus.PENDING);
         when(bookingRepository.save(any())).thenReturn(savedBooking);
+
+        when(appProperties.getExpiration()).thenReturn(Duration.ofMinutes(15));
 
         Booking result = bookingService.bookUnit(request);
 

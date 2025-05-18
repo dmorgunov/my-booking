@@ -2,10 +2,9 @@ package dm.dev.booking.controller;
 
 import dm.dev.booking.controller.dto.BookingRequest;
 import dm.dev.booking.controller.dto.BookingResponse;
+import dm.dev.booking.controller.dto.PaymentResponse;
 import dm.dev.booking.model.Booking;
-import dm.dev.booking.model.Payment;
 import dm.dev.booking.service.BookingService;
-import dm.dev.booking.service.CacheService;
 import dm.dev.booking.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ public class BookingController {
 
     private final BookingService bookingService;
     private final PaymentService paymentService;
-    private final CacheService cacheService;
 
     @PostMapping("/book")
     public ResponseEntity<BookingResponse> book(@RequestBody BookingRequest request) {
@@ -40,16 +38,13 @@ public class BookingController {
         return ResponseEntity.ok().build();
     }
 
+    //todo: get rid of custom mapping (mapstruct or similar)
     @GetMapping("/{id}/payment")
-    public ResponseEntity<Payment> getPayment(@PathVariable UUID id) {
+    public ResponseEntity<PaymentResponse> getPayment(@PathVariable UUID id) {
         return paymentService.findByBookingId(id)
-                .map(ResponseEntity::ok)
+                .map(payment -> ResponseEntity.ok(
+                        new PaymentResponse(payment.id(), payment.booking().id(), payment.paid())))
                 .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/available-units")
-    public ResponseEntity<Integer> getAvailableUnitCount() {
-        return ResponseEntity.ok(cacheService.getAvailableUnitCount());
     }
 
     private BookingResponse mapToResponse(Booking booking) {
